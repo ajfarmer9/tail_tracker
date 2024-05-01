@@ -348,19 +348,10 @@ function Card({ plane }) {
   );
 } //-------------------------------------END OF CARD--------------------------------------------------------
 
-function GetPlanes() {
+/*function GetPlanes() {
   //gets planes from json file
   let planeHolder = crafts;
   console.log(planeHolder);
 
   return planeHolder;
-} //-----------------------------------END OF GetPlanes---------------------
-
-function BottomNav() {
-  return (
-    <div>
-      <li className="bottom_nav_item">Add Plane</li>
-      <li className="bottom_nav_item">Search</li>
-    </div>
-  );
-}
+} //-----------------------------------END OF GetPlanes---------------------*/
