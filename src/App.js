@@ -2,7 +2,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Routes,
   Route,
   Link,
@@ -290,13 +290,13 @@ function App() {
 
   return (
     //--------APP RETURN---------
-    <BrowserRouter>
+    <Router>
       <SemiNav />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/Edit" element={<EditPlane />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 } //----------------------------------END OF APP-------------------------------------
 
