@@ -40,7 +40,6 @@ function App() {
       
 
       let tempTail = state;
-      let ind;
       let empName_T;
       let tailNum_T;
       let washed_T;
@@ -50,26 +49,25 @@ function App() {
       let dateWashed_T;
       let dateConditioned_T;
 
-      planes.map((currentPlane, index) => {/*Find the plane in the array that matches the tail number sent over store data outside of this loop*/
-        if(currentPlane.tailNum === tempTail){
-          ind = index;
-          empName_T = currentPlane.empName;
-          tailNum_T = currentPlane.tailNum;
-          washed_T = currentPlane.washed ? "true" : "false";//string representation of bool
-          washerD = currentPlane.washed;//actual bool
-          conditioned_T = currentPlane.bootsCond ? "true" : "false";
-          condiD = currentPlane.bootsCond;
-          dateConditioned_T = currentPlane.dateCond;
-          dateWashed_T = currentPlane.dateWashed;
+      for(let index = 0; index < planes.length; index++){/*Find the plane in the array that matches the tail number sent over store data outside of this loop*/
+        if(planes[index].tailNum === tempTail){
+          empName_T = planes[index].empName;
+          tailNum_T = planes[index].tailNum;
+          washed_T = planes[index].washed ? "true" : "false";//string representation of bool
+          washerD = planes[index].washed;//actual bool
+          conditioned_T =planes[index].bootsCond ? "true" : "false";
+          condiD = planes[index].bootsCond;
+          dateConditioned_T = planes[index].dateCond;
+          dateWashed_T = planes[index].dateWashed;
         }
-      })
+      }
+
       const [washer, setWasher] = useState(washed_T); //set state variables so checkbox can be checked
       const [condi, setCondi] = useState(conditioned_T); //" "
       const [washO, setWasherO] = useState(washerD); //used to monitor if date input should be shown or not; if true, show date false = dont show
       const [condiO, setCondiO] = useState(condiD);
 
       const updatePlane = async () => {
-        //let index;
         const planeRef = query(collection(db, 'tails'), where('tailNum', '==', tailNum_T));
         const findPlane = await getDocs(planeRef);
         let docID = '';
@@ -80,7 +78,6 @@ function App() {
         const getPlane = doc(db, 'tails', docID);
         await updateDoc(getPlane, {tailNum: tailNum_T, empName: empName_T, washed: washO, dateWashed: dateWashed_T, bootsCond: condiO, dateCond: dateConditioned_T});
         //----------------------------------------Below is code to update list so that react re-renders home page--------------
-      //index = planes.indexOf(docID);
       /*Create a new object with values from user input */
       const updatedObject = {
           tailNum: tailNum_T, 
@@ -224,6 +221,7 @@ function Card({plane}){//-------------------------------------CARD--------------
     const formattedDateCond = plane.dateCond ? format(new Date(plane.dateCond), "MM-dd-yyyy") : "";
 
       return(
+      
         <section className='planeCard'>
           <section className='plane_id_section'>
             <h4 className='two_piece' id="tail_num">Tail Number: {plane.tailNum}</h4>
@@ -249,3 +247,15 @@ function GetPlanes(){//gets planes from json file
   return planeHolder;
 
 }//-----------------------------------END OF GetPlanes---------------------
+
+
+function BottomNav(){
+  
+  
+  return(
+    <div>
+      <li className='bottom_nav_item'>Add Plane</li>
+      <li className='bottom_nav_item'>Search</li>
+    </div>
+  )
+}
