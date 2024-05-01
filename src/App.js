@@ -8,7 +8,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import crafts from "./aircrafts.json";
+//import crafts from "./aircrafts.json";
 import { db } from "./firebase";
 import { collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { format } from "date-fns";
